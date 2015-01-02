@@ -23,7 +23,11 @@ help:
 	@echo '   ssh_upload                       upload the web site using SSH     '
 	@echo '                                                                      '
 
-all: html ssh_upload git
+all: html ssh_upload git wc
+
+wc: 
+	./wc.sh
+	./cc.sh
 
 html: clean $(OUTPUTDIR)/index.html
 	@echo 'Done'
