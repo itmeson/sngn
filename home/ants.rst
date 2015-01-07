@@ -11,8 +11,8 @@ A lot of Ants
 **One Hundred Hungry Ants**, by Elinor J. Pinczes and illustrated by
 Bonnie MacKain, is another delightful story, in which a colony of ants
 sets out to raid a picnic. They start out marching in single file, when
-the littlest ant, a budding mathematician, shouts "Stop, we're moving
-way too slow. Some food will long be gone unless we hurry up. So... with
+the littlest ant, a budding mathematician, shouts "Stop! We're moving
+way too slow! Some food will long be gone unless we hurry up. So... with
 2 lines of 50 we'd get there soon, I know."
 
 So the ants scurry about to reform into 2 lines, then set out again. But
