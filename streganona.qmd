@@ -1,0 +1,148 @@
+---
+title: "Strega Nona"
+execute:
+  echo: false
+---
+
+## Pasta for Two
+
+Specifically, I want to think around how __fast__ the magic pot works.
+
+On a normal stove, cooking one pound of pasta (enough for a family, or one Strega Nona and one **Big** Anthony) requires heating 4-6 quarts of water for around 10 minutes to get it boiling, then adding the pasta, which will then cook in the boiling water for another 10 minutes or so.  So, rounding that off, non-magical pasta for a family takes about 20 minutes and 5 quarts of water.
+
+But Strega Nona sings a song and suddenly steaming hot pasta appears.  I won't reprint the whole song here, (I don't want to violate Tomie de Paola's estate's copyright --- go buy the book, or get it from your library!), but I timed myself singing the song 5 times in a row "Bubble, bubble, pasta pot ...." -- it took 51 seconds, so singing the song once takes, on average, a little more than 10 seconds.  20 minutes is ${60*20} seconds. That means the magic pot is 120 times faster than the regular way of making pasta.
+
+<!--FIXME-->FIXME Buiild pasta pile viz
+
+Notice that the two piles are each growing at constant rates, but those rates are (wildly) different from each other.  Personally, while I find this picture of growing piles helpful, as the pile grows I start to lose my sense of how big it really is.  So it might be useful to also get more quantitative, and to specifically get quantitative about the **rate** of pasta production, rather than **how much** pasta has been produced. So let's try this graph.
+
+<!---FIXME---> FIXME graph plugin
+```{ojs}
+a = 10
+```
+
+
+What you see at first is a blue bar showing that there isn't any completed pasta for 20 minutes (this is the normal pot).  Zoom out a little and you see a second blue bar, showing ONE completed pasta pot after 20 minutes, and then two pots completed after 40 minutes.  So the blue bars are showing the amount of completed pasta as time goes on, coming from the normal pot.
+
+Click the "magic" button, and now you'll see smaller purple bars.  These show the pasta completed by the magic pot -- a new complete pot every 20 seconds.
+
+Okay, now click the "all" button, and you will see both sets of bars together, and the graph will slowly zoom out automatically.
+
+As the graph zooms out, showing more and more time and more and more (ridiculous numbers of) pasta pots, you can see the flat blue bars for the normal way of cooking merge together into what looks like a straight line.  You can also see the purple bars for the magic pasta pot's production merge together into another straight line.  The magic line is **much** steeper than the normal line.  It is this steepness that shows that the magic is faster.  In a math class you would call this the slope -- the blue line has a slope of one pot per 20 minutes, or 3 pots per hour, while the purple line has a slope of one pot per 20 seconds, or 3 pots per minute, OR 180 pots per hour.  The thing to pay attention to is the way the locations of the lines can tell you how much pasta has been produced at any time, and how the slopes of the lines tell you how fast it is being produced.
+
+Play with the graph for a bit, use it to answer questions like "How much pasta can a normal pot produce in 10 hours?" or "How much more pasta would I have with the magic pot after 2 days?" 
+
+## Feeding the multitude
+
+After learning of the existence of the magic pot, Big Anthony of course goes to tell everyone else in town about it.  And of course they laugh at him.
+
+So Big Anthony gets angry (which is not a very good thing to be), vowing to show them all just as soon as he gets a chance.
+
+Only two days later when Strega Nona announces she has to go visit her friend in the next town, Big Anthony ("My chance has come!") immediately takes the pot down off the shelf, sings the song, and exults as the pot fills with pasta.
+
+If you ever wondered who would let a magic pasta pot just keep magic-ing along --- well, Big Anthony would.  He next runs down into the town, shouting "Pasta for all at Strega Nona's house!".  The townspeople arrive with forks and plates and platters and bowls, and Big Anthony spends a happy while scooping out pasta for everyone.
+
+The pot, it seems, will just keep producing pasta until the stopping song is sung, and apparently Big Anthony scoops it out fast enough to feed the entire town as they come up the line, without any spilling.  If the pot takes about 20 seconds to make a family worth of pasta (4 people -- Big Anthony must have eaten three servings when Strega Nona fed him), then he has to be scooping out a serving about every 5 seconds to keep up with the pasta pot to prevent it from spilling out.
+
+I've done some experiments, and I think this is a little fast as a server.  I think 10 seconds is a more reasonable number, considering he has to say hello, scoop out the pasta, plop it on someone's plate, platter, or bowl, beam with pride at their thanks and amazement, and then bundle them out the door so he can serve the next stunned neighbor.
+
+Can you do that in 10 seconds?  Is 20 seconds more reasonable? This next graph visualizes the amount of pasta in the pot.  If Big Anthony keeps up with the pot, one serving every 5 seconds, the amount in the pot stays steady.  If he serves faster than that, the pot might begin to empty out.  And if he works slower than that, extra pasta should be piling up. You can control Big Anthony's work rate with the slider - notice what happens when you make him work slowly, chit-chatting with every neighbor, and what happens when you make him work fast, rudely rushing through every townsperson without taking the time to bask in his triumph.
+
+<!---FIXME---> FIXME input-output rate viz
+
+The important thing about this process is equalizing the rates.  If the rate of pasta production (input) is matched by the rate of pasta serving (output) then the amount of pasta in the pot will remain steady, in a dynamic equilibrium. The fact that the pasta doesn't seem to spill out during its "feed the multitudes" phase suggests that Big Anthony has equalized the rates.  But the rate that keeps the pot from spilling out is really fast for a server.  
+
+So either Big Anthony is working very quickly to serve the pasta, or somehow the pot slows itself down when it's being used.  Perhaps the pot senses that it is being used, and "simmers down" accordingly?  I think the latter is more likely.  If I'm right, then we've discovered that the pot has at least two modes -- "Pasta for Two", which is four servings every 20 seconds, and "Feed the Multitudes", which is a little bit __slower__, as long as the server is actively scooping the pasta.
+
+## Run for your lives!
+
+So Big Anthony has his triumph, serving the whole town (some of them two or three helpings!) until all are satisfied.  Then he comes out of the house to receive his congratulations, when someone notices pasta starting to spill out onto the floor.
+
+Big Anthony rushes into the house, singing the stopping song ("Enough, enough, my pasta pot..."), but he doesn't know about the three kisses that conclude the magic, so the song has no effect!  The book describes him frantically repeating the song, picking up the pot, trying to put a cover on it, sitting on the cover, all with no effect, when the pressure of the pasta lifts the cover and Big Anthony into the air.  One of the townspeople rescues Big Anthony just in time before the house is completely filled. 
+
+Okay, so we already know that the pot can cook a pound of pasta in 20 seconds, and was possibly operating a little slower than that during the "feed the multitudes" phase.  My question at this point is, "How long it should take to fill up the little house?"
+
+To answer this we need to have an estimate of how much space the cooked pasta takes up and how much space there is in the little house.  I've done some experiments (again), and found that a pound of cooked pasta, with the water drained (Seriously... Where does the water go?) takes up about 2 quarts of my 6 quart pot.  A quart is almost the same size as a liter, and a liter is a cube 10 centimeters by 10 centimeters by 10 centimeters (about 4 inches by 4 inches by 4 inches).  As an aside, unit systems are crazy fascinating and weird.  Anyway, the cooked pasta is then two quarts, or a rectangular prism 20 centimeters by 10 centimeters by 10 centimeters, 2000 cubic centimeters:
+
+<!---FIXME---> FIXME rectangular prism of cooked pasta image
+
+What about the little house?  From Tomie de Paola's drawings (delightful by the way -- he has a distinctive style that just fits the magic and wit of the story), the house is just a single room, with kitchen and eating space and Strega Nona's "little bed".  So I'm going to estimate the house as another rectangle, about 20 feet long, 10 feet wide, and 8 feet high.  That's 1600 cubic feet.  Cooked pasta is flexible and, in the story at least, will flow kind of like a liquid (hmmm.  How does she keep the pasta from sticking?).  So we can assume the pasta will fill up the whole space (Huh -- I wonder if it will pack down because of its own weight?  What will the density be when there's that much of it piled up?)
+
+1600 cubic feet is about 45 million cubic centimeters.
+
+1600 * 12 * 12 * 12 * 2.54 * 2.54 * 2.54
+
+45 million cubic centimeters divided by 2000 cubic centimeters is ${45000000/2000} families' worth of pasta.  Each of which was supposed to take 20 seconds to make. That's ${22500*20} seconds or ${22500*20/60} minutes or ${22500*20/60/60} hours.  So it should have taken the pot **more than 5 days** to produce enough pasta to fill the house, more than enough time for Strega Nona to go visit her friend and return to stop the pot without any lives being put in danger.
+
+So, uh, it looks like the pot increases its production rate _just a little bit_ if no one is scooping out the pasta.  I feel like this is a design flaw for Calabrian magic pasta pots, and while Big Anthony certainly shouldn't have messed with forces he couldn't understand, the manufacturer bears some liability here too.
+
+You might be feeling a little surprised at this point, because it might seem like it's not __that much__ more pasta to fill a cottage than a pot, and once it overflows the pot it's just a matter of time to fill the cottage.
+
+Well, it is just a matter of time, but it should have been a lot more time.  I find volume difficult to conceptualize, and find that many of my students have a hard time with it too.  It's just surprising how much stuff can fit!  My personal theory about why it's difficult is that we are actually quite good at estimating __lengths__ and so have a very good intuition for comparing different lengths.  "I'm 6 feet tall, this room is twelve feet across, so two of me could fit lying on the floor."  But what about areas?  We're not as good at that because it involves two measurements and a multiplication, but we still do okay.  Like imagining putting new tile on a floor where the tiles are 6 inch by 6 inch squares, and the room is 12 feet by 12 feet. We can do that readily enough:
+
+24 tiles could fit one direction along the floor (12 feet / 6 inches) and 24 tiles can fit the other direction.  So each row has 24 tiles in it, and there are 24 tiles. That's a classic setup for a multiplication problem, so we multiply 24 * 24 = ${24 * 24} tiles!  That's a LOT of tiles.  Areas grow surprisingly fast, volumes grow even faster.  
+
+So when we estimated the size of the cottage and got 45 million cubic centimeters, that's a LOT of space to fill up with pasta. It's shocking that that much pasta came out of the pot, quickly enough to push Big Anthony up in the air and to require saving him.  Calabrian magic pasta pots are __dangerous__.  They need warning labels.
+
+But we're still not to the crazy part.
+
+After the pasta escapes the house, it flows down into the town, filling the town square, trapping the residents who fall on their knees in prayer and desperation before Strega Nona arrives to stop the madness.  The drawings show the house on top of a hill above the town, at least a few hundred feet away from the square.  And the book describes the people literally running down the hill to escape the wave of pasta.
+
+Pasta flowing downhill nearly as fast as a person can run is a pretty terrifying image.  The townspeople make it downhill ahead of the pasta and gather tables and mattresses to barricade it out, but the pasta breaks through, inundating the town square.
+
+I don't want to exaggerate the power of the pasta pot, so I'm going to try to model this situation as conservatively as I can.  Let's assume the pasta only flows out one direction, downhill toward the town (and not out the other side of the house too!). Let's assume that the spreading out you can see in the pictures is just enough to fill in the space in the road and the town square -- ie, the pasta really is flowing like a liquid just to fill the available space, and flowing downhill.  So the pasta seems to respond to gravity in the normal kind of way.
+
+The pasta density seems to be pretty consistent (also like a liquid).  The drawings show **very** long noodles, packed tightly together, pushing forward, at least as tall as the doors in the houses.  That means that the pasta is at least 6 feet high.  The wall of pasta widens as it travels, with a width of about 10 feet when it leaves the little house, and maybe 100 feet wide as it fills the square.  And the distance the pasta covers is around 200 feet, about 100 feet from the house, and another 100 feet in the square.
+
+At its maximum extent then, the pasta fills a complicated shape like the one in the picture.  In the square, it is a rectangular prism 6 feet high by 100 feet wide and 100 feet long -- ${6 * 100 * 100} cubic feet.  Between the cottage and the square, it is a trapezoidal prism, again 6 feet high, 10 feet wide on the narrow wend and 100 feet wide on the wide end, and 200 feet long, that's ${.5 * (10+100) * 200 * 6} cubic feet.
+
+Again, unit systems are crazy and weird, and the reason I keep estimating with American customary units is because I'm an American and I'm used to them so my estimates are better in them.  But I keep converting to cubic centimeters because I find volumes make more sense in SI (metric) units.  We've got a total of 126,000 cubic feet of pasta, which is enough to feed ${126000 * 12 * 12 * 12 *2.54 * 2.54 * 2.54 / 2000} families of 4!!
+
+
+The pasta moves fast enough to make the townspeople run, but not fast enough to overtake them.  I'm going to estimate about 10 feet per second (a jogging speed).
+
+## What about nukes?
+
+Okay, we're finally getting to the title.  Does Strega Nona have nukes?  The energy to produce all that pasta has to come from somewhere, and we're going to figure out if nukes is a plausible source.
+
+So how much energy __does__ it take?
+
+Cooking a family serving of pasta the normal way takes ${a} Joules - about 3 million Joules, assuming you have a pot that doesn't lose any heat (also magic!).  This comes from the energy required to get the water to boiling and to keep it boiling for 10 minutes, plus the energy to induce the pasta to accept some of the water -- essentially a phase transition from a solid state to a gel state.  I don't know the details of the phase transition business, so a simpler way to estimate it is to figure out how much energy a typical stove puts out while the burner is on, and then multiply that by the 20 minutes that one usually has it running to cook the pasta.
+
+**TODO** That amounts to ?? Joules.  We're going to call it 3 million for now.
+
+And to fill the square takes 1.8 million family servings.  Multiply those and you get 5.4 trillion joules (or __tera__joules).
+
+If we assume a constant rate of production, and it takes about a minute for the pasta to fill the square (they're running, remember?!)  So the rate of energy production is 5.4 trillion divided by 60 seconds, or ${5400000000000/60} Joules per second -- 90 __billion Watts__.
+
+This is just the _average_ power output of the pasta pot.  The peak is probably a bit higher than that since the rate would have had to change as the pasta spread out.
+
+The prefix for billion is giga.  We're talking about 90 Gigawatts of power, sustained for at least a minute.
+
+What could possibly produce that much?
+
+ * The now classic movie, __Back to the Future__ taught me that a bolt of lightning produces 1.21 Gigawatts, so that's not big enough.
+ * A loaded diesel truck has a power output of almost 400 thousand watts.  Which is big, but not big enough
+ * Contrary to the awesome movie, __Monsters, Inc.__, a human scream is not that powerful, carrying only about 0.001 Watts.
+
+We are clearly going to have to think bigger.
+
+The largest electricity generating stations in the world actually get us close.  The Three Gorges Dam on the Yangtze River in central China directs the water behind the dam into narrow channels that increase the pressure and speed of the water.  These then cause generators to spin which produce electricity.  How much?  **22.5 Gigwatts.**  That is an astonishing amount, but it's only about 25% of what we need.
+
+If we were to combine the total power output of all eight of the eight largest electricity generating stations in the world, that would be enough to make the pasta.
+
+The total power usage of the entire planet is ${160000 * 1000 /(24 * 365) } Gigawats -- that's more than enough by a long shot.  So the power of the pasta pot is within human capacity, but only if we harness at least the total output of 8 power stations into producing pasta!
+
+Would a nuke be enough on its own?
+
+The Tsar Bomba was a prototype nuclear weapon developed by the Soviet Union in the 1960's that had a theoretical upper limit of 100 Megatons of TNT -- this means its explosive power would have been the same as that of 100 million tons of TNT.  In metric energy units, this is about 100 Terawatt-Hour = ${100000000000000*3600} Joules.  More than enough energy, by a LOT.  Nuclear weapons tend to explode and be done within in less than a second, so this energy isn't sustained for a long time, but if it could be trapped and redirected a little at a time, it would be plenty to power the pasta pot.
+
+So Strega Nona might have nukes, but not a nuclear power plant, at least not a conventional one.  The largest commercial nuclear power plant [produces a little under 8 gigawatts](https://en.wikipedia.org/wiki/List_of_nuclear_power_stations), we would need around 11 of those stations.  And those large nuclear power plants are actually composed of several different nuclear reactors, which produce their energy by allowing nuclear fission to heat water to produce steam, which is then used to spin a turbine as in a hydroelectric generator.
+
+There's currently one more way to produce the energy Strega Nona needs, and it too involves nuclear energy.  **The sun** is a giant nuclear fusion reactor and it produces more than would be needed by the pot **by a lot**.  
+
+The energy radiated away from the Sun as light reaches the surface of the Earth with a density of about 1000 Watts per square meter.  That means every square meter of the surface is receiving 1000 Joules of energy from the Sun every second.  That number is an average, as it is considerably lower on cloudy days, higher on clearer days, and it also depends somewhat on the seasons, the distance between the Earth and the Sun, and on solar activity like sunspots.  But 1000 watts per square meter is a good estimate.
+
+The very best solar cells, which convert light energy into electricity, have an efficiency of around 17%, which means that most of the energy isn't turned into electricity (it goes into heat).  That means, even with the best solar cells available, we won't get more than 200 Watts per square meter.
+
+We need 90 Gigawatts to power the pasta pot, so we need 90 billion divided by 200 = ${90000000000/200} = 450 million square meters.  That would be a square ${Math.sqrt(450000000)}, 21000 meters per side.  In other words, you would need 21 km (about 15 miles) by 21 km covered with solar cells, in bright sunlight, to get enough energy to power the pasta pot.  Not impossible, but not likely in Calabria -- that's about 10 percent of the total land area of Calabria.  But maybe Strega Nona has her solar station floating in the Ionian Sea?

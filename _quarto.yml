@@ -1,0 +1,24 @@
+project:
+  type: book
+
+book:
+  title: "Strega Nona's Got Nukes"
+  author: "Mark Betnel"
+  date: "8/4/2022"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - streganona.qmd
+    - ants.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: spacelab
+  pdf:
+    documentclass: scrreprt
+
+
+

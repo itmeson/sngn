@@ -1,0 +1,370 @@
+---
+title: "Organizing Ants"
+execute:
+  echo: false
+  
+---
+
+  
+
+
+As we've seen, Strega Nona is a story about energy usage and resources.  __100 Hungry Ants__, written by Elinor J. Pinczes and illustrated by Bonnie MacKain is a story about logistics and organization:
+
+> A whole hill of hungry ants, their faces all aglow, came  swarming from the forest, to cross the field below.  A soft breeze fanned the sunshine and whisked them on their way. It hinted of yummies for their empty tummies -- that means a picnic! Hooray!
+
+> 100 ants were singing and marching in a row, we're going to a picnic! a hey and a hi dee ho!
+
+
+But the ants are worried -- they have competitors to reach the picnic.  Larger animals are seen racing ahead and later carrying away some of the treats, what will happen if they are too slow?
+
+> "Stop! " said the littlest ant, "we're moving way to slow. Some food will be gone unless we hurry up. So... with 2 lines of 50 we'd get there soon, I know."
+
+The ants scurry about to reform into two lines of 50 ants, but they're still worried, so... "4 lines of 25!", "5 lines of 20!", and finally "10 lines of 10!"
+
+You'll have to read the book to find out exactly what happens.  Here we're going to explore two questions:
+
+ 1. Why 2 lines of 50 and 4 lines of 25, but not 3 lines?
+ 2. Does rearranging make the ants move faster?
+
+## How many lines?
+
+Let's explore the effect of different numbers of ants and different numbers of lines.  Try 3 lines with 100 ants, what do you notice?
+
+<!---User input for number of lines--->
+```{ojs}
+viewof ants1 = Inputs.range([1,1000], {step:1, value:10, label:"Number of Ants"})
+viewof lines1 = Inputs.range([1, ants1], {step: 1, value: 2, label:"Number of lines"})
+```
+
+<!---- ant networks for divisibility --->
+```{ojs}
+graph1 = {
+    //create new graph object with empty nodes and links
+    var g = ({nodes: [], links: []}) 
+
+    //for (let i = 0; i < 100; i++) {
+    //    g.nodes.push({id: i, group: 0})
+    //    if (i < 99) {
+    //        g.links.push({source: i, target: i + 1, value: 1})
+    //    }
+    //}
+    const rows = Math.floor(ants1 / lines1)
+    var groupID = 0
+    var rowID = 0
+        for (let i = 0; i < ants1; i++) {
+            groupID = i % lines1
+            rowID = Math.floor(i / lines1)
+            g.nodes.push({id: i, group: groupID, row: rowID})
+            if ((i % lines1 < lines1 - 1) && (i + 1 < ants1)) {
+                g.links.push({source: i, target: i + 1, value: 1})
+            }
+            if ((rowID < rows - 1) && (i + lines1 < ants1)) {
+                g.links.push({source: i, target: i + lines1, value: 1})
+            }
+
+        }
+    return g
+}
+```
+
+```{ojs}
+
+//import {ForceGraph} from "@d3/disjoint-force-directed-graph"
+
+//graph = FileAttachment("graph_line.json").json()
+console.log(graph1)
+
+chart1 = ForceGraph(graph1, {
+  nodeId: d => d.id,
+  nodeGroup: d => d.group,
+  nodeTitle: d => `${d.id} (${d.group}, ${d.row}) `,
+  width,
+  height: 680,
+  center: [0,0],
+  invalidation // a promise to stop the simulation when the cell is re-run
+})
+
+```
+
+For some combinations of ants and lines, the ant network can form up into even lines all of the same length -- for example 100 ants make 4 lines of 25 ants.  But try 3 lines of ants, and you find 3 lines of 33 ants, with one little ant left over!  With 6 lines there's 4 ants left over, and with 7 there's 2 left out.  When the little ant in the story goes from 1 line to 2, then 2 lines to 4, then 4 lines to 5, and finally straight to 10 lines of 10.  We are seeing that at least the littlest ant knows about divisibility!  There wouldn't be anything wrong with using uneven lines, necessarily, but the story presumes that the lines should all have the same length, and the littlest ant knows how to get them.    
+
+
+## Does rearranging affect the speed?
+
+But the real question (and joke) in this story is whether rearranging the lines will make them move faster.  My kids got this joke immediately.  Let's see what happens when you change the number of lines in the ant network below.  This time the simulation has been set with the correct options to get evenly divisible lines, and the timer shows us how much time it takes from "GO" to "We're here, let's eat!"
+
+<!---ant networks for speed--->
+```{ojs}
+graph = {
+    //create new graph object with empty nodes and links
+    var g = ({nodes: [], links: []}) 
+
+    //for (let i = 0; i < 100; i++) {
+    //    g.nodes.push({id: i, group: 0})
+    //    if (i < 99) {
+    //        g.links.push({source: i, target: i + 1, value: 1})
+    //    }
+    //}
+    const rows = ants / lines
+    var groupID = 0
+    var rowID = 0
+    if (ants % lines === 0) {
+        for (let i = 0; i < ants; i++) {
+            groupID = i % lines
+            rowID = Math.floor(i / lines)
+            g.nodes.push({id: i, group: groupID, row: rowID})
+            if (i % lines < lines - 1) {
+                g.links.push({source: i, target: i + 1, value: 1})
+            }
+            if (rowID < rows - 1) {
+                g.links.push({source: i, target: i + lines, value: 1})
+            }
+
+        }
+    }
+    return g
+}
+```
+
+```{ojs}
+
+//import {ForceGraph} from "@d3/disjoint-force-directed-graph"
+
+//graph = FileAttachment("graph_line.json").json()
+console.log(graph)
+
+chart = ForceGraph(graph, {
+  nodeId: d => d.id,
+  nodeGroup: d => d.group,
+  nodeTitle: d => `${d.id} (${d.group}, ${d.row}) `,
+  width,
+  height: 680,
+  linkStrength: 0.9,
+  nodeStrength: -.5,
+  invalidation // a promise to stop the simulation when the cell is re-run
+})
+
+```
+
+<!---User input for number of lines--->
+```{ojs}
+viewof ants = Inputs.range([1,1000], {step:1, value:100, label:"Number of Ants"})
+
+//viewof lines = Inputs.range([1, fac.length], {step: 1, value: 1, label:"Number of lines"})
+viewof lines = Inputs.select(fac, {value: 1, label:"Number of lines"})
+```
+
+
+What did you see?  I saw that the more lines were formed, the **more** time it took to get the ants to the food!  This is because they **don't** move faster, and it takes more time to get organized and set out.  The first ant arrives sooner if they just take off, and let the ants behind figure out how to organize into a line.  This is how real ants do it -- scouts go find the food, leaving trails of pheremone behind them.  Other ants follow the trails, in the process leaving more trail behind them.  If a lot of ants are going to the same place, they're leaving a lot of pheremone trail behind them -- so a lot more ants will follow them.  For a food trove as big as a human picnic, it makes sense for as many ants as possible to go to the same place.
+
+## It was the best of times
+
+What was the littlest ant thinking? Did he think that forming into two rows would get them there in half the time?  Is there some other strategy the littlest ant was thinking about, in which it *would* make sense to divide into lines?
+
+Because all the ants move at the same speed, we're never going to be able to get the first ant to the food any faster than if they just set out and start walking.  The "best case" is that lead ant, and their arrival time is set by the distance to the food and their walking speed.  But again, for a trove as large as a human picnic, in the presence of competition from larger animals -- maybe it makes sense to think about how long it takes the **back** of the group of ants to arrive.  This is "worst case" thinking, and what we want is to decrease as much as possible this "worst case", ie, the arrival time of the last ants, which marks the moment that the ants can begin carrying back the maximum amount of food.
+
+This last experiment allows you to change the number of lines and the total number of ants, and reports both how much time it takes the lead ant to arrive (best case) and how much time it takes the last ant to arrive (worst case).  See if you can find a sweet spot that.
+
+
+<!--- sim for worst case --->
+```{ojs}
+console.log("worst case")
+```
+
+
+Are there other examples of situations where it's helpful to think not just about the "best case" but also the "worst case"?  What about the median case (when the middle ant arrives)? Or the average case?
+
+Think about how to define "speed" in the following situations:
+
+ 1. A group of people working together on painting a house?
+ 2. Finding the highest score on a classroom set of exams, vs. sorting the entire list of scores?
+ 3. 
+
+
+
+
+
+
+
+
+
+
+    - What kinds of tasks benefit from working in parallel? And which don't?
+    - Are there issues with taking up more space if they march in rows? (predators)
+    - How do ants manage to navigate? (usually in one row using scent trails, or in swarms when seeking)  Makes me think about search algorithms
+
+
+<!---Force graph function definition --->
+```{ojs}
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/disjoint-force-directed-graph
+function ForceGraph({
+  nodes, // an iterable of node objects (typically [{id}, …])
+  links // an iterable of link objects (typically [{source, target}, …])
+}, {
+  nodeId = d => d.id, // given d in nodes, returns a unique identifier (string)
+  nodeGroup, // given d in nodes, returns an (ordinal) value for color
+  nodeGroups, // an array of ordinal values representing the node groups
+  nodeTitle, // given d in nodes, a title string
+  nodeFill = "currentColor", // node stroke fill (if not using a group color encoding)
+  nodeStroke = "#fff", // node stroke color
+  nodeStrokeWidth = 1.5, // node stroke width, in pixels
+  nodeStrokeOpacity = 1, // node stroke opacity
+  nodeRadius = 5, // node radius, in pixels
+  nodeStrength,
+  linkSource = ({source}) => source, // given d in links, returns a node identifier string
+  linkTarget = ({target}) => target, // given d in links, returns a node identifier string
+  linkStroke = "#999", // link stroke color
+  linkStrokeOpacity = 0.6, // link stroke opacity
+  linkStrokeWidth = 1.5, // given d in links, returns a stroke width in pixels
+  linkStrokeLinecap = "round", // link stroke linecap
+  linkStrength,
+  center,
+  colors = d3.schemeTableau10, // an array of color strings, for the node groups
+  width = 640, // outer width, in pixels
+  height = 600, // outer height, in pixels
+  invalidation // when this promise resolves, stop the simulation
+} = {}) {
+  // Compute values.
+  const N = d3.map(nodes, nodeId).map(intern);
+  const LS = d3.map(links, linkSource).map(intern);
+  const LT = d3.map(links, linkTarget).map(intern);
+  if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
+  const T = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
+  const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
+  const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
+
+  // Replace the input nodes and links with mutable objects for the simulation.
+  nodes = d3.map(nodes, (_, i) => ({id: N[i]}));
+  links = d3.map(links, (_, i) => ({source: LS[i], target: LT[i]}));
+
+  // Compute default domains.
+  if (G && nodeGroups === undefined) nodeGroups = d3.sort(G);
+
+  // Construct the scales.
+  const color = nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, colors);
+
+  // Construct the forces.
+  const forceNode = d3.forceManyBody();
+  const forceLink = d3.forceLink(links).id(({index: i}) => N[i]);
+  if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
+  if (linkStrength !== undefined) forceLink.strength(linkStrength);
+  var simulation;
+  if (center !== undefined) {
+    console.log("center", center)
+    simulation = d3.forceSimulation(nodes)
+      .force("link", forceLink.distance(20).iterations(10).strength(1))
+      .force("charge", forceNode.strength(-40).distanceMin(10))
+      .force("x", d3.forceX(center[0]))
+      .force("y", d3.forceY(center[1]))
+      .on("tick", ticked);
+  }
+  else {
+    console.log("no center")
+    simulation = d3.forceSimulation(nodes)
+      .force("link", forceLink.distance(10))
+      .force("charge", forceNode.strength(-20).distanceMin(10))
+      .on("tick", ticked);
+  }
+
+    //const simulation = d3.forceSimulation(nodes)
+    //  .force("link", forceLink)
+    //  .force("charge", forceNode)
+    //  .on("tick", ticked);
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [-width / 2, -height / 2, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  const link = svg.append("g")
+      .attr("stroke", linkStroke)
+      .attr("stroke-opacity", linkStrokeOpacity)
+      .attr("stroke-width", typeof linkStrokeWidth !== "function" ? linkStrokeWidth : null)
+      .attr("stroke-linecap", linkStrokeLinecap)
+    .selectAll("line")
+    .data(links)
+    .join("line");
+
+  if (W) link.attr("stroke-width", ({index: i}) => W[i]);
+
+  const node = svg.append("g")
+      .attr("fill", nodeFill)
+      .attr("stroke", nodeStroke)
+      .attr("stroke-opacity", nodeStrokeOpacity)
+      .attr("stroke-width", nodeStrokeWidth)
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+      .attr("r", nodeRadius)
+      .call(drag(simulation));
+
+  if (G) node.attr("fill", ({index: i}) => color(G[i]));
+  if (T) node.append("title").text(({index: i}) => T[i]);
+
+  // Handle invalidation.
+  if (invalidation != null) invalidation.then(() => simulation.stop());
+
+  function intern(value) {
+    return value !== null && typeof value === "object" ? value.valueOf() : value;
+  }
+
+  function ticked() {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
+
+    node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+  }
+
+  function drag(simulation) {    
+    function dragstarted(event) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      event.subject.fx = event.subject.x;
+      event.subject.fy = event.subject.y;
+    }
+    
+    function dragged(event) {
+      event.subject.fx = event.x;
+      event.subject.fy = event.y;
+    }
+    
+    function dragended(event) {
+      if (!event.active) simulation.alphaTarget(0);
+      event.subject.fx = null;
+      event.subject.fy = null;
+    }
+    
+    return d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended);
+  }
+
+  return Object.assign(svg.node(), {scales: {color}});
+}
+
+```
+
+<!---factoring functions --->
+```{ojs} 
+  fac = {
+    var f = [1, ants]
+    let i = 2
+    while (i < Math.sqrt(ants)) {
+      if (ants%i == 0) {
+        f.push(i)
+        f.push(ants/i)
+      }
+      i += 1
+    }
+    f.sort(function(a,b){return a-b})
+    return f
+  }
+```

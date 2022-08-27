@@ -1,0 +1,9 @@
+# Preface {.unnumbered}
+
+This book is a labor of love that I've had in my mind for more than a decade. For the completion I am deeply indebted to my wife Sara and children Galen and Geneva, who insisted that the idea was cool and that they wanted to see me finish it.  Thanks to them for being early readers, free with their comments and suggestions.  I do hope the final product meets their expectations.
+
+
+
+This book was produced using the Quarto publishing system.
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
