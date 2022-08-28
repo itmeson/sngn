@@ -1,0 +1,23 @@
+---
+title: "It's very Strange"
+execute:
+  echo: false
+---
+
+Super hero stories aren't exactly children's literature.  But they aren't exactly adult literature either.  The past few decades have seen many superhero stories told in film, comics, graphic novels, and novelizations, and they've soaked into the culture.  "I understood that reference" and other memes are instantly recognizable and meaningful for a lot of people.
+
+There are other books that deal with the philosophy of superheroes and the physics of superheroes, but I want to focus on just one aspect of superhero stories -- what's the most unlikely power, and which of the stories handles it in the most interesting way?
+
+One of the most well-known principles of physics is the phrase "Every action has an equal and opposite reaction".  It's Newton's Third Law of motion, and even if most people don't know exactly what it means or where it comes from, I bet that I could stop random people on the street, tell them "Every action has ..." and that most of them could finish the sentence.  It's an understood reference that's in the culture.
+
+But what does it mean?  Most physics books interpret it as being a statement about forces, if I exert a force on you, you must also exert a force on me.  Another way of thinking about it though is to make it be a statement about momentum -- if the momentum of an object changes, it must have been changed *by* something, and the thing that caused the change must also have changed in the process -- by exactly the same amount and in the opposite direction.  If one object picks up a unit of momentum, then the other object must have lost a unit of momentum.
+
+I think that might make more sense, but we now have a new question, "What's momentum?"
+
+Momentum, using Newton's language, is "the quantity of motion".  It's not just how fast an object is moving, it's also how much motion there is -- so it has to have something to do with the mass of the object too.  We can calculate it by multiplying the mass and the velocity.
+
+That means 5 kilograms of mass, moving 2 meters per second has 10 "momentums", and so would 1 kilogram of mass moving at 10 meters per second, or .01 kilograms (10 grams) moving at 1000 meters per second.  They all have the same "quantity of motion".
+
+Now let's take a look at some simulations of interactions between objects, which cause changes in the momentum.
+
+

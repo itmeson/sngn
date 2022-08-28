@@ -10,6 +10,7 @@ book:
     - intro.qmd
     - streganona.qmd
     - ants.qmd
+    - strange.qmd
     - references.qmd
 
 bibliography: references.bib

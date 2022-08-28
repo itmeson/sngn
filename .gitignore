@@ -1,5 +1,6 @@
 # output files
 output
+_book
 
 # vim swp files
 *.swp
@@ -58,3 +59,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+
+/.quarto/
